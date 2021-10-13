@@ -7,6 +7,7 @@ package com.Retos.CicloTres.model;
 
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,10 +20,16 @@ public class Client implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
      
+    
+    @Column(name="idClient", columnDefinition = "number")
     private Integer idClient;
+    @Column(name="email", columnDefinition = "varchar(45)")
     private String email;
+    @Column(name="password", columnDefinition = "number")
     private String password;
+    @Column(name="name", columnDefinition = "varchar(45)")
     private String name;
+    @Column(name="age", columnDefinition = "number")
     private Integer age;
 
 

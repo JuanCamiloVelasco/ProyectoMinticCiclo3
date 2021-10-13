@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,14 +23,28 @@ import javax.persistence.Table;
 public class Category implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-     
+
+    @Column(name="id", columnDefinition = "number")
     private Integer id;
+    @Column(name="name", columnDefinition = "varchar(45)")
     private String name;
+    @Column(name="description", columnDefinition = "varchar(250)")
     private String description;
 
+    //Uno a muchos Categoria-Partyroom
+    
     @OneToMany(cascade = {CascadeType.PERSIST},mappedBy = "category")
-    @JsonIgnoreProperties("category")
+    @JsonIgnoreProperties({"partyroom", "category"})
     public List<Partyroom> partyrooms;
+    
+
+    public List<Partyroom> getPartyrooms() {
+        return partyrooms;
+    }
+
+    public void setPartyrooms(List<Partyroom> partyrooms) {
+        this.partyrooms = partyrooms;
+    }
     
     public Integer getId() {
         return id;

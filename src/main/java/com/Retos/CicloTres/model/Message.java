@@ -7,12 +7,17 @@ package com.Retos.CicloTres.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -20,35 +25,26 @@ import javax.persistence.Table;
 public class Message implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="idMessage", columnDefinition = "number")
     private Integer idMessage;
+    @Column(name="messageText", columnDefinition = "varchar(250)")
     private String messageText;
 
-    @ManyToOne
-    @JoinColumn(name="partyroom")
-    private Partyroom partyroom;
+    //Relacion uno a uno mensajes - partyroom
+    @OneToOne(cascade = {CascadeType.PERSIST},mappedBy = "messages")
+    @JsonIgnoreProperties("messages")
+    public Partyroom partyrooms;
 
-
-    @ManyToOne
-    @JoinColumn(name="client")
-    @JsonIgnoreProperties("message")
-    private Client client;
-
-    public Partyroom getPartyroom() {
-        return partyroom;
+    public Partyroom getPartyrooms() {
+        return partyrooms;
     }
 
-    public void setPartyroom(Partyroom partyroom) {
-        this.partyroom = partyroom;
+    public void setPartyrooms(Partyroom partyrooms) {
+        this.partyrooms = partyrooms;
     }
 
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
+    
+    
     public Integer getIdMessage() {
         return idMessage;
     }
@@ -70,3 +66,6 @@ public class Message implements Serializable{
 
 
 }
+
+
+

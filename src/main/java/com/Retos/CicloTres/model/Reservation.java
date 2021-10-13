@@ -7,6 +7,7 @@ package com.Retos.CicloTres.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,9 +20,19 @@ import javax.persistence.Table;
 public class Reservation implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="idReservation", columnDefinition = "number")
     private Integer idReservation;
     private Date startDate;
     private Date devolutionDate;
+    private Date status;
+
+    public Date getStatus() {
+        return status;
+    }
+
+    public void setStatus(Date status) {
+        this.status = status;
+    }
 
     public Integer getIdReservation() {
         return idReservation;
