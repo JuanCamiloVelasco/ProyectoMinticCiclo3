@@ -20,7 +20,7 @@ public class MessageRepository {
      public List<Message> getAll(){
         return (List<Message>) messageCrudRepository.findAll();
     }
-    public Optional<Message> getMessage(int id){
+    public Optional<Message>getMessage(int id){
         return messageCrudRepository.findById(id);
     }
     public Message save(Message mensaje){

@@ -16,12 +16,14 @@ import org.springframework.stereotype.Service;
 public class MessageService {
     @Autowired
     private MessageRepository messageRepository;
-    
     public List<Message> getAll(){
         return messageRepository.getAll();
     }
 
     public Optional<Message> getMessage(int id){
+        return messageRepository.getMessage(id);
+    }
+    public Optional<Message> getMessageClient(int id){
         return messageRepository.getMessage(id);
     }
 

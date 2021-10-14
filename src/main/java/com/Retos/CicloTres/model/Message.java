@@ -7,8 +7,6 @@ package com.Retos.CicloTres.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
-import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,8 +14,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -30,21 +26,41 @@ public class Message implements Serializable{
     @Column(name="messageText", columnDefinition = "varchar(250)")
     private String messageText;
 
-    //Relacion uno a uno mensajes - partyroom
-    @OneToOne(cascade = {CascadeType.PERSIST},mappedBy = "messages")
-    @JsonIgnoreProperties("messages")
-    public Partyroom partyrooms;
-
-    public Partyroom getPartyrooms() {
-        return partyrooms;
-    }
-
-    public void setPartyrooms(Partyroom partyrooms) {
-        this.partyrooms = partyrooms;
-    }
+    //Relacion muchos a uno mensajes - partyroom
+    @ManyToOne
+    @JoinColumn(name="partyroom")
+    @JsonIgnoreProperties({"messages","reservations","client"})
+    private Partyroom partyroom;
+    
+    //Relacion muchos a uno mensajes - clientes
+    @ManyToOne
+    @JoinColumn(name="client")
+    @JsonIgnoreProperties({"messages","reservations"})
+    private Client client;
 
     
     
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+    
+    
+    
+    
+    public Partyroom getPartyroom() {
+        return partyroom;
+    }
+
+    public void setPartyroom(Partyroom partyroom) {
+        this.partyroom = partyroom;
+    }
+
+   
+
     public Integer getIdMessage() {
         return idMessage;
     }
@@ -53,8 +69,6 @@ public class Message implements Serializable{
         this.idMessage = idMessage;
     }
 
-
-
     public String getMessageText() {
         return messageText;
     }
@@ -62,10 +76,83 @@ public class Message implements Serializable{
     public void setMessageText(String messageText) {
         this.messageText = messageText;
     }
-    
-
 
 }
 
+//package com.Retos.CicloTres.model;
+//
+//import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+//import java.io.Serializable;
+//import javax.persistence.Column;
+//import javax.persistence.Entity;
+//import javax.persistence.GeneratedValue;
+//import javax.persistence.GenerationType;
+//import javax.persistence.Id;
+//import javax.persistence.JoinColumn;
+//import javax.persistence.ManyToOne;
+//import javax.persistence.Table;
+//
+//@Entity
+//@Table(name="message")
+//public class Message implements Serializable{
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Column(name="idMessage", columnDefinition = "number")
+//    private Integer idMessage;
+//    @Column(name="messageText", columnDefinition = "varchar(250)")
+//    private String messageText;
+//
+//    //Relacion muchos a uno mensajes - partyroom
+//    @ManyToOne
+//    @JoinColumn(name="partyroom")
+//    @JsonIgnoreProperties({"messages","reservations","client"})
+//    private Partyroom partyroom;
+//    
+//    //Relacion muchos a uno mensajes - clientes
+//    @ManyToOne
+//    @JoinColumn(name="client")
+//    @JsonIgnoreProperties({"messages","reservations"})
+//    private Client client;
+//
+//    
+//    
+//    public Client getClient() {
+//        return client;
+//    }
+//
+//    public void setClient(Client client) {
+//        this.client = client;
+//    }
+//    
+//    
+//    
+//    
+//    public Partyroom getPartyroom() {
+//        return partyroom;
+//    }
+//
+//    public void setPartyroom(Partyroom partyroom) {
+//        this.partyroom = partyroom;
+//    }
+//
+//   
+//
+//    public Integer getIdMessage() {
+//        return idMessage;
+//    }
+//
+//    public void setIdMessage(Integer idMessage) {
+//        this.idMessage = idMessage;
+//    }
+//
+//    public String getMessageText() {
+//        return messageText;
+//    }
+//
+//    public void setMessageText(String messageText) {
+//        this.messageText = messageText;
+//    }
+//
+//}
 
 
