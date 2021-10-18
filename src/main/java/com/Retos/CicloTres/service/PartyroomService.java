@@ -37,4 +37,33 @@ public class PartyroomService {
             }
         }
     }
+    public Partyroom update(Partyroom partys){
+        if(partys.getId()!=null){
+            Optional<Partyroom>salas=partyroomRepository.getPartyroom(partys.getId());
+            if(!salas.isEmpty()){
+                if(partys.getName()!=null){
+                    salas.get().setName(partys.getName());
+                }
+                if(partys.getOwner()!=null){
+                    salas.get().setOwner(partys.getOwner());
+                }
+                if(partys.getCapacity()!=null){
+                    salas.get().setCapacity(partys.getCapacity());
+                }
+                if(partys.getDescription()!=null){
+                    salas.get().setDescription(partys.getDescription());
+                }
+                return partyroomRepository.save(salas.get());
+            }
+        }
+        return partys;
+    }
+    public boolean deletePartyroom(int id){
+        Optional<Partyroom> partys=getPartyroom(id);
+        if(!partys.isEmpty()){
+            partyroomRepository.delete(partys.get());
+            return true;
+        }
+        return false;
+    }
 }

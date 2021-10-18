@@ -23,8 +23,10 @@ public class ScoreRepository {
     public Optional<Score> getScore(int id){
         return scoreCrudRepository.findById(id);
     }
-
     public Score save(Score puntaje){
         return scoreCrudRepository.save(puntaje);
+    }
+    public void delete(Score puntaje){
+        scoreCrudRepository.delete(puntaje);
     }
 }

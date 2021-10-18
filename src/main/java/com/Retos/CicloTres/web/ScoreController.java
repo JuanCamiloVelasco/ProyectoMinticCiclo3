@@ -29,10 +29,20 @@ public class ScoreController {
     public Optional<Score> getScore(@PathVariable("id") int id){
         return scoreService.getScore(id);
     }
-
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
     public Score save(@RequestBody Score puntaje){
         return scoreService.save(puntaje);
+    }
+    @PutMapping("/update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Score update(@RequestBody Score puntaje){
+        return scoreService.update(puntaje);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public boolean deleteScore(@PathVariable("id") int id){
+        return scoreService.deleteScore(id);
     }
 }

@@ -24,9 +24,10 @@ public class PartyroomRepository {
     public Optional<Partyroom> getPartyroom(int id){
         return PartyroomCrudRepository.findById(id);
     }
-
     public Partyroom save(Partyroom partyroom){
         return PartyroomCrudRepository.save(partyroom);
     }
-    
+    public void delete(Partyroom partyroom){
+        PartyroomCrudRepository.delete(partyroom);
+    }
 }

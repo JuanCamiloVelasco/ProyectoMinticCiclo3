@@ -28,10 +28,20 @@ public class AdminController {
     public Optional<Admin> getAdmin(@PathVariable("id") int id){
         return adminService.getAdmin(id);
     }
-
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
     public Admin save(@RequestBody Admin administrador){
         return adminService.save(administrador);
+    }
+    @PutMapping("/update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Admin update(@RequestBody Admin administrador){
+        return adminService.update(administrador);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public boolean deleteAdmin(@PathVariable("id") int id){
+        return adminService.deleteAdmin(id);
     }
 }

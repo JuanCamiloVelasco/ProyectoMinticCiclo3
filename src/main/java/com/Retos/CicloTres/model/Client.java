@@ -29,7 +29,7 @@ public class Client implements Serializable{
     private Integer idClient;
     @Column(name="email", columnDefinition = "varchar(45)")
     private String email;
-    @Column(name="password", columnDefinition = "varchar")
+    @Column(name="password", columnDefinition = "varchar(45)")
     private String password;
     @Column(name="name", columnDefinition = "varchar(45)")
     private String name;

@@ -23,8 +23,10 @@ public class ReservationRepository {
     public Optional<Reservation> getReservation(int id){
         return reservationCrudRepository.findById(id);
     }
-
     public Reservation save(Reservation reserva){
         return reservationCrudRepository.save(reserva);
+    }
+    public void delete(Reservation reserva){
+        reservationCrudRepository.delete(reserva);
     }
 }

@@ -37,4 +37,12 @@ public class ReservationService {
             }
         }
     }
+    public boolean deleteReservation(int id){
+        Optional<Reservation> reserva=getReservation(id);
+        if(!reserva.isEmpty()){
+            reservationRepository.delete(reserva.get());
+            return true;
+        }
+        return false;
+    }
 }

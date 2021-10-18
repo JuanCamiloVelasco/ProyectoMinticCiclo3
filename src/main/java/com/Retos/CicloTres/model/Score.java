@@ -25,6 +25,8 @@ public class Score implements Serializable{
     
     @Column(name="idScore", columnDefinition = "number")
     private Integer idScore;
+    @Column(name="calificacion", columnDefinition = "number")
+    private String calificacion;
     @Column(name="mensaje", columnDefinition = "varchar(250)")
     private String mensaje;
     @Column(name="reserva", columnDefinition = "number")
@@ -34,6 +36,17 @@ public class Score implements Serializable{
     @JsonIgnoreProperties({"score"})
     private Reservation reservation;
 
+    public String getCalificacion() {
+        return calificacion;
+    }
+
+    public void setCalificacion(String calificacion) {
+        this.calificacion = calificacion;
+    }
+
+    
+    
+    
     public Reservation getReservation() {
         return reservation;
     }

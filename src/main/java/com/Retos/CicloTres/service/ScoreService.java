@@ -37,4 +37,27 @@ public class ScoreService {
             }
         }
     }
+    public Score update(Score puntaje){
+        if(puntaje.getIdScore()!=null){
+            Optional<Score>puntos=scoreRepository.getScore(puntaje.getIdScore());
+            if(!puntos.isEmpty()){
+                if(puntaje.getCalificacion()!=null){
+                    puntos.get().setCalificacion(puntaje.getCalificacion());
+                }
+                if(puntaje.getMensaje()!=null){
+                    puntos.get().setMensaje(puntaje.getMensaje());
+                }
+        }
+        }
+        return puntaje;
+    }
+    
+    public boolean deleteScore(int id){
+        Optional<Score> puntaje=getScore(id);
+        if(!puntaje.isEmpty()){
+            scoreRepository.delete(puntaje.get());
+            return true;
+        }
+        return false;
+    }
 }

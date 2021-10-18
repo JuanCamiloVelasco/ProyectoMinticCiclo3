@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
 public class MessageController {
     @Autowired
     private MessageService messageService;
-    
+
     @GetMapping("/all")
     public List<Message> getMessage(){
         return messageService.getAll();
@@ -36,4 +36,16 @@ public class MessageController {
     public Message save(@RequestBody Message mensaje){
         return messageService.save(mensaje);
     }
+    @PutMapping("/update")//NO ES NECESARIO EN EL RETO PERO IGUAL LO HICE
+    @ResponseStatus(HttpStatus.CREATED)
+    public Message update(@RequestBody Message mensaje){
+        return messageService.update(mensaje);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public boolean deleteMessage(@PathVariable("id") int id){
+        return messageService.deleteMessage(id);
+    }
+ 
 }
