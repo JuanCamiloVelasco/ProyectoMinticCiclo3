@@ -362,7 +362,7 @@ limpiarCamposM();
 }}
 function editarRegistroM(idMessage){
 	$.ajax({    
-    url : 'http://localhost:8080/api/Message/'+idMessage,
+    url : 'http://150.136.61.110:8080/api/Message/'+idMessage,
     type : 'GET',
     dataType : 'json',
     contentType: "application/json; charset=utf-8",
