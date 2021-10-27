@@ -5,6 +5,8 @@
  */
 package com.Retos.CicloTres.web;
 
+import com.Retos.CicloTres.Reportes.CountClient;
+import com.Retos.CicloTres.Reportes.StatusReservation;
 import com.Retos.CicloTres.model.Reservation;
 import com.Retos.CicloTres.service.ReservationService;
 import java.util.List;
@@ -41,6 +43,22 @@ public class ReservationController {
     public boolean deleteReservation(@PathVariable("id") int id){
         return reservationService.deleteReservation(id);
     }
+    
+    @GetMapping("/report-status")
+    public StatusReservation getReservationStatusReport(){
+        return reservationService.getReservationStatusReport();
+    }
+    
+    @GetMapping("/report-dates/{dateOne}/{dateTwo}")
+    public List<Reservation> getReservationReportDates(@PathVariable("dateOne") String dateOne, @PathVariable("dateTwo") String dateTwo){
+        return reservationService.getReservationPeriod(dateOne, dateTwo);
+    }
+    
+    @GetMapping("/report-clients")
+    public List<CountClient> getReservationReportsClients(){
+        return reservationService.getTopClients();
+    }
+    
 }
 
 //package com.Retos.CicloTres.web;
