@@ -660,6 +660,112 @@ function limpiarCamposRes(){
 //        $("#score").val('')
 }
 
+function ReporteCD(){
+    $.ajax({    
+		url : 'http://150.136.61.110:8080/api/Reservation/report-status',
+		type : 'GET',
+		dataType : 'json',
+		contentType: "application/json; charset=utf-8",
+	  
+		success : function(respuesta) {
+                    
+			console.log(respuesta);
+			$("#TablaP").empty();
+			var Tablaprin = '<table id= "customers">';
+			Tablaprin += '<thead>'
+			Tablaprin += '<tr>';
+			Tablaprin += '<th> Completed </th>';
+			Tablaprin += '<th> Cancelled </th>';
+			Tablaprin += '</tr>';
+			Tablaprin += '</thead>';		
+				Tablaprin += '<tbody>';
+				Tablaprin += '<tr>';
+				Tablaprin += '<td>'+ respuesta.completed+ '</td>';
+                                Tablaprin += '<td>'+ respuesta.cancelled+ '</td>';						 						 
+				Tablaprin += '</tr>';
+				Tablaprin += '</tbody>';
+			Tablaprin += '</table>';
+			$("#TablaP").append(Tablaprin);
+                        
+		}
+	});
+ }
+
+function CargarRes2020(){
+	$.ajax({    
+		url : 'http://150.136.61.110:8080/api/Reservation/report-dates/2020-01-01/2020-12-31',
+		type : 'GET',
+		dataType : 'json',
+		contentType: "application/json; charset=utf-8",
+	  
+		success : function(respuesta) {
+			console.log(respuesta);
+			$("#TablaP").empty();
+			var Tablaprin = '<table id= "customers">';
+			Tablaprin += '<thead>'
+			Tablaprin += '<tr>';
+			Tablaprin += '<th> ID </th>';
+			Tablaprin += '<th> FECHA INICIO </th>';
+			Tablaprin += '<th> FECHA DEVOLUCION </th>';
+//			Tablaprin += '<th> PARTYROOM </th>';
+//			Tablaprin += '<th> CLIENT </th>';
+//			Tablaprin += '<th> SCORE </th>';
+			Tablaprin += '</tr>';
+			Tablaprin += '</thead>';
+			for (i=0; i<respuesta.length; i++){
+				Tablaprin += '<tbody>';
+				Tablaprin += '<tr>';
+				Tablaprin += '<td>'+ respuesta[i].idReservation+ '</td>';
+                                Tablaprin += '<td>'+ respuesta[i].startDate+ '</td>';						 						 
+				Tablaprin += '<td>'+ respuesta[i].devolutionDate+ '</td>';	
+				Tablaprin += '</tr>';
+				Tablaprin += '</tbody>';
+			}
+			Tablaprin += '</table>';
+			$("#TablaP").append(Tablaprin);
+		}
+	});
+    }
+function CargarTOP(){
+	$.ajax({    		  
+		url : 'http://150.136.61.110:8080/api/Reservation/report-clients',
+		type : 'GET',
+		dataType : 'json',
+		contentType: "application/json; charset=utf-8",
+	  
+		success : function(respuesta) {
+			console.log(respuesta);
+			$("#TablaP").empty();
+			var Tablaprin = '<table id= "customers">';
+			Tablaprin += '<thead>'
+			Tablaprin += '<tr>';
+			Tablaprin += '<th> TOTAL RESERVAS </th>';
+			Tablaprin += '<th> ID </th>';
+                        Tablaprin += '<th> CORREO </th>';
+                        Tablaprin += '<th> CONTRASEÑA </th>';
+			Tablaprin += '<th> NOMBRE </th>';
+			Tablaprin += '<th> EDAD </th>';
+			Tablaprin += '</tr>';
+			Tablaprin += '</thead>';
+			for (i=0; i<respuesta.length; i++){
+				Tablaprin += '<tbody>';
+				Tablaprin += '<tr>';
+                                Tablaprin += '<td>'+ respuesta[i].total+ '</td>';
+				Tablaprin += '<td>'+ respuesta[i].client.idClient+ '</td>';
+				Tablaprin += '<td>'+ respuesta[i].client.email+ '</td>'; 		
+				Tablaprin += '<td>'+ respuesta[i].client.password+ '</td>'; 		
+				Tablaprin += '<td>'+ respuesta[i].client.name+ '</td>'; 		 		
+				Tablaprin += '<td>'+ respuesta[i].client.age+ '</td>'; 		 
+				Tablaprin += '</tr>';	
+				Tablaprin += '</tbody>';
+			}
+			Tablaprin += '</table>';
+			$("#TablaP").append(Tablaprin);
+		},
+	});
+}
+
+
 //METODOS GET POST PUT Y DELETE DE LA TABLA ADMIN
 function CargarAdm(){
 	$.ajax({    
@@ -936,11 +1042,3 @@ function limpiarCamposScore(){
 //        $("#reserva").val('')
 }
 
-//            <select name="category" id="category" placeholder="category_id">
-//            </select>
-//<input class= "tamañoceldas" type="number" id="category" placeholder="category"> toca ponerlo ahorita
-//            <input class= "tamañoceldas" type="number" id="id" placeholder="id"> solo por si acaso
-
-//para poner en message ahorita
-//<input class= "tamañoceldas" type="number" id="partyroom" placeholder="partyroom">
-//<input class= "tamañoceldas" type="number" id="client" placeholder="client">
